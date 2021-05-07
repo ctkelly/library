@@ -1,104 +1,47 @@
-// For objects, what are the rules for semicolon and comma usage?
+// 1. User clicks icon to bring up the "add book" form
+// 2. User inputs into form the title, author, # of pages, and read/not read
+// 3. User clicks to submit form
+// 4. The stuff in the form populates a new object based on Book constructor
+// 5. Push that new object to myLibrary
+// 6. Display the newBook object on the "bookshelf"
+// 7. Book on bookshelf should show book info and have two buttons: "mark as read" and "remove"
 
-// Example #1. Following the example from The Odin Project. The below works...
-// function Book() {
-//   // ... but what is the point of creating this constructor and having it empty? LibraryBook won't inherit anything from it.
-// }
-
-// Book.prototype.info = function() {
-//   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-// }
-
-// function LibraryBook(title, author, pages, read) {
-//   this.title = title
-//   this.author = author
-//   this.pages = pages
-//   this.read = read
-// }
-
-// LibraryBook.prototype = Object.create(Book.prototype)
-
-// const book1 = new LibraryBook("Star Trek", "Gene Roddenberry", 250, "already read")
-
-// console.log(book1.title); // Star Trek
-// console.log(book1.info()); // correctly returns the sentence from info()
+let addBookBtn = document.querySelector("#add-book-btn");
+let submitBtn = document.querySelector("#submit-btn");
 
 
-// Example #2. Why doesn't this work? Why is LibraryBook not inheriting the stuff inside Book?
-// function Book(title, author, pages, read) {
-//   this.title = title
-//   this.author = author
-//   this.pages = pages
-//   this.read = read
-//   this.color = "blue" // this line is here for experimental purposes only
-// }
-
-// Book.prototype.info = function() {
-//   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`
-// }
-
-// function LibraryBook() {
-//   this.series = 8 // line is here for experimental purposes only
-// }
-
-// LibraryBook.prototype = Object.create(Book.prototype)
-
-// const book1 = new LibraryBook("Star Trek", "Gene Roddenberry", 250, "already read")
-// console.log(book1.series); // 8
-// console.log(book1.title); // undefined
-// console.log(book1.info()); // undefined by undefined, undefined pages, undefined
-// console.log(book1.color); // undefined
-// console.log(Book.color);  // undefined
-// console.log(LibraryBook.color);  //undefined
+addBookBtn.addEventListener("click", displayForm);
+submitBtn.addEventListener("click", addBookToLibrary);
 
 
-// Example #3. This works when using call() to reference Book within LibraryBook.
-// function Book(title, author, pages, read) {
-//   this.title = title
-//   this.author = author
-//   this.pages = pages
-//   this.read = read
-//   this.color = "blue"
-// }
+function displayForm() {
+  let addBookForm = document.getElementById("add-book-form");
+  addBookForm.style.display = "block";
+}
 
-// Book.prototype.info = function() {
-//   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`
-// }
+let myLibrary = [];
 
-// function LibraryBook(title, author, pages, read) {
-//   Book.call(this, title, author, pages, read)
-//   this.series = 8  // line is here for experimental purposes only
-// }
-
-// LibraryBook.prototype = Object.create(Book.prototype)
-
-// const book1 = new LibraryBook("Star Trek", "Gene Roddenberry", 250, "already read")
-// console.log(book1.series); // 8
-// console.log(book1.title); // Star Trek
-// console.log(book1.info()); // correctly returns the sentence from info()
-// console.log(book1.color); // blue
-// console.log(Book.color);  // undefined
-// console.log(LibraryBook.color);  //undefined
-
-
-
-// Example #4
 function Book(title, author, pages, read) {
   this.title = title
   this.author = author
   this.pages = pages
   this.read = read
-  this.color = "blue"  // this line is here for experimental purposes only
-}
+ }
 
-Book.prototype.info = function() {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`
-}
+// Clicking on submit after book data has been entered should:
+// clear the form
+// take the form input values and use them for new Book to create new Book object
+// display info from new Book object with "have read" and "remove" buttons
 
-const book1 = new Book("Star Trek", "Gene Roddenberry", 250, "already read");
+function addBookToLibrary(title, author, pages, read) {
+  let newBook =  new Book(title, author, pages, read); // create object from the form's user input
+  newBook.name = document.getElementById("title").value;
+  newBook.author = document.getElementById("author").value;
+  newBook.pages = document.getElementById("pages").value;
+  // the radio button inputs here
 
-console.log(book1.title); // Star Trek
-console.log(book1.info()); // correctly returns the sentence from info()
-console.log(book1.color); // blue
-console.log(Book.color);  // undefined
+  myLibrary.push(newBook);
+  console.log(newBook);
+  console.log(myLibrary);
+} 
 
