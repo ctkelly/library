@@ -5,6 +5,25 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header>
+    <h1>Library</h1>
+    <button id="add-book-btn">add book</button>
+  </header>
+
+  <form id="add-book-form" action="/add-book-form" method="get"> <!-- this is wrong -->
+    <label for="title">Title</label><br>
+    <input type="text" id="title" name="title"><br>
+    <label for="author">Author</label><br>
+    <input type="text" id="author" name="author"><br>
+    <label for="pages">Number of pages</label><br>
+    <input type="text" id="pages" name="pages"><br>
+    <input type="radio" id="have-read" name="read-status" value="have-read">
+    <label for="have-read">Have read</label>
+    <input type="radio" id="not-read" name="read-status" value="not-read">
+    <label for="not-read">Not read</label>
+    <button id="submit-btn">submit</button>
+  </form>
+  
 
   <script src="library.js"></script>
 </body>
